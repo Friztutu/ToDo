@@ -1,25 +1,25 @@
 {% extends 'users/base.html' %}
 {% load static %}
 
-
 {% block content %}
   <div class="container-fluid main">
     <div class="container">
       <div class="container-fluid add-btn">
         <h1 class="title">Новая запись</h1>
       </div>
-      <form action="index.html">
+      <form action="{% url 'tasks:new' %}" method="post">
+        {% csrf_token %}
         <div class="input-group mb-3 mt-5">
           <span class="input-group-text">Заголовок</span>
-          <input required type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+          {{ form.title }}
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">Дедлайн</span>
-          <input id="datetime" type="datetime-local">
+          {{ form.deadline }}
         </div>
         <div class="form-floating">
-          <textarea class="form-control text-input" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 20em;"></textarea>
-          <label for="floatingTextarea2">Описание</label>
+          {{ form.description }}
+          <label for="form.description.id_for_label">Описание</label>
         </div>
         <div class="container-fluid add-btn">
           <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
