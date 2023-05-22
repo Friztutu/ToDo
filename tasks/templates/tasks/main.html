@@ -1,6 +1,9 @@
 {% extends 'users/base.html' %}
 {% load static %}
 
+{% block refresh %}
+    <meta http-equiv="refresh" content="60;{% url 'tasks:list' %}">
+{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href='{% static "/css/main.css" %}'>
@@ -32,31 +35,16 @@
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
           </div>
         <div class="list-group">
-                <a href="{% url 'tasks:card' %}" class="list-group-item list-group-item-action ok m-3 list-a" aria-current="true">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small>And some small print.</small>
+            {% for task in object_list %}
+                <a href="{% url 'tasks:card' task.id %}" class="list-group-item list-group-item-action m-3 list-a {% if task.deadline > task.get_now %} ok {% else %} late {% endif %}" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ task.title }}</h5>
+                        <small>Осталось: {% if task.is_die %} Просрочено {% else %} {{ task.get_now|timesince:task.deadline  }} {% endif %}</small>
+                    </div>
+                    <p class="mb-1">{{ task.description }}</p>
+                    <small>Дедлайн: {{ task.deadline }}</small>
                 </a>
-                <a href="card.html" class="list-group-item list-group-item-action late m-3 list-a">
-                <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">List group item heading</h5>
-                  <small class="text-body-secondary">3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small class="text-body-secondary">And some muted small print.</small>
-            </a>
-          <a href="card.html" class="list-group-item list-group-item-action medium m-3 list-a">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">List group item heading</h5>
-              <small class="text-body-secondary">3 days ago</small>
-            </div>
-            <p class="mb-1">Some placeholder content in a paragraph.</p>
-            <small class="text-body-secondary">And some muted small print.</small>
-          </a>
-        </div>
+            {% endfor %}
       <div class="container-fluid add-btn">
         <a href="{% url 'tasks:new' %}">
           <button type="button" class="btn btn-primary btn-lg">Добавить новую запись</button>

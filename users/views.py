@@ -5,6 +5,7 @@ from users.models import CustomUser
 from users.forms import LoginForm, ProfileForm, RegistrationForm
 from django.http import HttpResponseRedirect
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 
 class UserLoginView(LoginView):
@@ -13,7 +14,7 @@ class UserLoginView(LoginView):
     form_class = LoginForm
 
     def get_success_url(self):
-        return reverse('users:profile', args=(self.request.user.id, ))
+        return reverse('users:profile', args=(self.request.user.id,))
 
 
 class ProfileView(UpdateView):
@@ -26,7 +27,7 @@ class ProfileView(UpdateView):
         return super().get(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('users:profile', args=(self.request.user.id, ))
+        return reverse('users:profile', args=(self.request.user.id,))
 
 
 class RegistrationView(CreateView):
@@ -36,6 +37,7 @@ class RegistrationView(CreateView):
     form_class = RegistrationForm
 
 
+@login_required
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('tasks:index'))

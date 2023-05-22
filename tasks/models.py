@@ -1,5 +1,7 @@
 from django.db import models
 from users.models import CustomUser
+import datetime
+from django.utils import timezone
 
 
 # Create your models here.
@@ -11,3 +13,11 @@ class Task(models.Model):
     user = models.ForeignKey(to=CustomUser, on_delete=models.CASCADE)
     is_done = models.BooleanField(default=False)
     is_die = models.BooleanField(default=False)
+
+    def check_time(self):
+        if not self.deadline > timezone.now():
+            self.is_die = True
+
+    def get_now(self):
+        self.check_time()
+        return timezone.now()

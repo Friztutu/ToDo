@@ -15,7 +15,7 @@ class NewTaskForm(forms.ModelForm):
 class EditTaskForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     deadline = forms.DateTimeField(widget=forms.DateTimeInput())
-    description = forms.Textarea()
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'height: 20em;'}))
 
     class Meta:
         model = Task
