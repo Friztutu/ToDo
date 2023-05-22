@@ -1,0 +1,18 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+
+{% block css %}
+  <link rel="stylesheet" href="static/css/index.css">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="main-text">
+      <p class="title-text">Используй <b>свое</b> время с умом вместе с 【₵₳₦₮Ⱡł₴₴】<sub>ToDo</sub><p>
+      <a href="{% url 'tasks:list' %}">
+        <button type="button" class="btn btn-success btn-lg">Начать</button>
+      </a>
+    </div>
+  </div>
+{% endblock %}

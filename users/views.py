@@ -1,11 +1,10 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.views.generic.base import TemplateView
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.views.generic.edit import UpdateView, CreateView
 from users.models import CustomUser
 from users.forms import LoginForm, ProfileForm, RegistrationForm
 from django.http import HttpResponseRedirect
+from django.contrib import auth
 
 
 class UserLoginView(LoginView):
@@ -35,3 +34,8 @@ class RegistrationView(CreateView):
     model = CustomUser
     success_url = reverse_lazy('users:login')
     form_class = RegistrationForm
+
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('tasks:index'))

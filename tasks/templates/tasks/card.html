@@ -1,0 +1,45 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+
+{% block content %}
+  <div class="container-fluid main">
+    <div class="image mt-5">
+      <img src='{% static "/img/pngegg.png" %}' alt="" class="border-image">
+    </div>
+    <div class="container">
+      <div class="container-fluid add-btn">
+        <h1 class="title">Задача 1</h1>
+      </div>
+      <form action="index.html">
+        <div class="input-group mb-3 mt-5">
+          <span class="input-group-text">Заголовок</span>
+          <input value="*Заголовок*" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">Дедлайн</span>
+          <input value="2003-11-23" type="date" aria-label="First name" class="form-control">
+          <input value="11:15" type="time" aria-label="Last name" class="form-control">
+        </div>
+        <div class="form-floating">
+          <textarea class="form-control text-input" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 20em;">*Описание задачи*</textarea>
+          <label for="floatingTextarea2"></label>
+        </div>
+        <div class="container-fluid add-btn">
+          <button type="submit" class="btn btn-primary btn-lg">Применить изменения</button>
+        </div>
+      </form>
+      <div class="container-fluid add-btn">
+        <a href="new.html">
+          <button type="button" class="btn btn-success">Выполнена</button>
+        </a>
+        <a href="new.html">
+          <button type="button" class="btn btn-danger">Удалить</button>
+        </a>
+      </div>
+    </div>
+    <div class="image mt-5">
+      <img src='{% static "/img/pngegg.png" %}' alt="" class="border-image">
+    </div>
+  </div>
+{% endblock %}
