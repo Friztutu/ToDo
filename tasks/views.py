@@ -5,6 +5,7 @@ from tasks.models import Task
 from django.urls import reverse_lazy, reverse
 from tasks.forms import NewTaskForm, EditTaskForm
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 
 
 # Create your views here.
@@ -21,6 +22,8 @@ class ListTasksView(ListView):
     def get_queryset(self):
         progress = self.kwargs.get('progress')
         queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+        queryset = Task.objects.filter(Q(title__icontains=query)) if query else queryset
         if not progress:
             queryset = queryset.filter(user_id=self.request.user.id, is_done=False, is_die=False)
 

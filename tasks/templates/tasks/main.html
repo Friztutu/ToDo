@@ -30,10 +30,12 @@
       <div class="container-fluid add-btn">
         <h1 class="title">Список дел</h1>
       </div>
-        <div class="input-group input-group-lg mt-5">
-            <button class="btn btn-info"><span id="inputGroup-sizing-lg">Поиск</span></button>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-          </div>
+        <form action="{% url 'tasks:list' %}" method="get">
+            <div class="input-group input-group-lg mt-5">
+                <button type="submit" class="btn btn-info"><span id="inputGroup-sizing-lg">Поиск</span></button>
+                <input name='q' type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+        </form>
         <div class="list-group">
             {% for task in object_list %}
                 <a href="{% url 'tasks:card' task.id %}" class="list-group-item list-group-item-action m-3 list-a {% if task.is_done %} ok {% elif task.deadline > task.get_now %} medium {% else %} late {% endif %}" aria-current="true">
