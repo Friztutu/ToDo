@@ -1,0 +1,49 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+
+{% block content %}
+  <div class="container">
+    <div class="container-fluid add-btn">
+        <h1 class="title">Регистрация</h1>
+    </div>
+    <form action="index.html">
+      <div class="row g-2 mt-5">
+        <div class="col-md">
+          <div class="form-floating m-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Имя</label>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="form-floating m-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Фамилия</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-floating m-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Логин</label>
+      </div>
+      <div class="form-floating m-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating m-3">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Пароль</label>
+      </div>
+      <div class="form-floating m-3">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Потвердите пароль</label>
+      </div>
+      <div class="container-fluid add-btn mb-3">
+          <button type="submit" class="btn btn-primary btn-lg">Зарегистрироваться</button>
+      </div>
+    </form>
+    <div class="card-footer text-center">
+        <div class="small"><a href='{% url "users:login" %}'>Есть аккаунт? Авторизируйся!</a></div>
+    </div>
+  </div>
+{% endblock %}

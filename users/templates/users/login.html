@@ -1,0 +1,28 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+
+{% block content %}
+  <div class="container">
+    <div class="container-fluid add-btn">
+        <h1 class="title">Авторизация</h1>
+    </div>
+    <form action="index.html">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control mt-5" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Логин</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Пароль</label>
+      </div>
+      <div class="container-fluid add-btn mb-3">
+          <button type="submit" class="btn btn-primary btn-lg">Войти</button>
+      </div>
+    </form>
+    <div class="card-footer text-center">
+        <div class="small"><a href='{% url "users:registration" %}'>Нужен аккаунт? Зарегистрируйся!</a></div>
+    </div>
+  </div>
+{% endblock %}
+

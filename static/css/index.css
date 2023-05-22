@@ -1,0 +1,19 @@
+body {
+    background: url("../img/1681276731_kartinki-pibig-info-p-rabota-kartinki-dlya-prezentatsii-arti-1.jpg") no-repeat center top fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.container {
+	margin-top: 2em;
+}
+
+.title-text {
+	font-size: 2em;
+}
+
+.main-text {
+	text-align: center;
+}
