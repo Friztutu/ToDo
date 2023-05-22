@@ -17,13 +17,13 @@
         <a class="nav-link disabled">Фильтрация</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Выполненые</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'tasks:list_filter' 'done' %}">Выполненые</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Текущие</a>
+        <a class="nav-link" href="{% url 'tasks:list' %}">Текущие</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Просроченные</a>
+        <a class="nav-link" href="{% url 'tasks:list_filter' 'die' %}">Просроченные</a>
       </li>
     </ul>
     <div class="container">
@@ -36,10 +36,10 @@
           </div>
         <div class="list-group">
             {% for task in object_list %}
-                <a href="{% url 'tasks:card' task.id %}" class="list-group-item list-group-item-action m-3 list-a {% if task.deadline > task.get_now %} ok {% else %} late {% endif %}" aria-current="true">
+                <a href="{% url 'tasks:card' task.id %}" class="list-group-item list-group-item-action m-3 list-a {% if task.is_done %} ok {% elif task.deadline > task.get_now %} medium {% else %} late {% endif %}" aria-current="true">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ task.title }}</h5>
-                        <small>Осталось: {% if task.is_die %} Просрочено {% else %} {{ task.get_now|timesince:task.deadline  }} {% endif %}</small>
+                        <small>Осталось: {% if task.is_die %} Просрочено {% elif task.is_done %} Выполнено {% else %} {{ task.get_now|timesince:task.deadline  }} {% endif %}</small>
                     </div>
                     <p class="mb-1">{{ task.description }}</p>
                     <small>Дедлайн: {{ task.deadline }}</small>

@@ -15,8 +15,9 @@ class Task(models.Model):
     is_die = models.BooleanField(default=False)
 
     def check_time(self):
-        if not self.deadline > timezone.now():
+        if not self.is_done and not self.deadline > timezone.now():
             self.is_die = True
+            self.save()
 
     def get_now(self):
         self.check_time()

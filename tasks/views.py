@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from tasks.models import Task
 from django.urls import reverse_lazy, reverse
 from tasks.forms import NewTaskForm, EditTaskForm
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -18,8 +19,17 @@ class ListTasksView(ListView):
     ordering = 'deadline'
 
     def get_queryset(self):
+        progress = self.kwargs.get('progress')
         queryset = super().get_queryset()
-        queryset = queryset.filter(user_id=self.request.user.id)
+        if not progress:
+            queryset = queryset.filter(user_id=self.request.user.id, is_done=False, is_die=False)
+
+        elif progress == 'die':
+            queryset = queryset.filter(user_id=self.request.user.id, is_die=True, is_done=False)
+
+        elif progress == 'done':
+            queryset = queryset.filter(user_id=self.request.user.id, is_done=True)
+
         return queryset
 
 
@@ -40,4 +50,17 @@ class CardTaskView(UpdateView):
     form_class = EditTaskForm
 
     def get_success_url(self):
-        return reverse('tasks:card', args=(self.kwargs['pk'], ))
+        return reverse('tasks:card', args=(self.kwargs['pk'],))
+
+
+def mark_task_as_complete(request, pk):
+    task = Task.objects.get(id=pk)
+    task.is_done = True
+    task.save()
+    return HttpResponseRedirect(reverse('tasks:list'))
+
+
+def delete_task(request, pk):
+    task = Task.objects.get(id=pk)
+    task.delete()
+    return HttpResponseRedirect(reverse('tasks:list'))
