@@ -34,6 +34,7 @@
                     <li><a class="dropdown-item" href="{% url 'users:profile' user.id %}">Личный кабинет</a></li>
                     <li><a class="dropdown-item" href="{% url 'tasks:list' %}">Записи</a></li>
                     <li><a class="dropdown-item" href="{% url 'tasks:new' %}">Создать новую запись</a></li>
+                    {% if user.is_superuser %} <li><a class="dropdown-item" href="{% url 'admin:index' %}">Админ панель</a></li> {% endif %}
                     <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
                   </ul>
                 </li>
