@@ -1,5 +1,6 @@
 {% extends 'users/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block refresh %}
     <meta http-equiv="refresh" content="60;{% url 'tasks:list' %}">
@@ -41,10 +42,10 @@
                 <a href="{% url 'tasks:card' task.id %}" class="list-group-item list-group-item-action m-3 list-a {% if task.is_done %} ok {% elif task.deadline > task.get_now %} medium {% else %} late {% endif %}" aria-current="true">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ task.title }}</h5>
-                        <small>Осталось: {% if task.is_die %} Просрочено {% elif task.is_done %} Выполнено {% else %} {{ task.get_now|timesince:task.deadline  }} {% endif %}</small>
+                        <small><b>Осталось: {% if task.is_die %} Просрочено {% elif task.is_done %} Выполнено {% else %} {{ task.get_now|timesince:task.deadline  }} {% endif %}</b></small>
                     </div>
-                    <p class="mb-1">{{ task.description }}</p>
-                    <small>Дедлайн: {{ task.deadline }}</small>
+                    <p class="mb-1">{{ task.description|truncatewords:20|linebreaks }}</p>
+                    <small><b>Дедлайн: {{ task.deadline|naturaltime }}</b></small>
                 </a>
             {% endfor %}
         </div>

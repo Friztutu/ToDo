@@ -14,6 +14,13 @@ class Task(models.Model):
     is_done = models.BooleanField(default=False)
     is_die = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = 'Задача'
+        verbose_name_plural = 'Задачи'
+
+    def __str__(self):
+        return f'{self.title} | {self.user.username}'
+
     def check_time(self):
         if not self.is_done and not self.deadline > timezone.now():
             self.is_die = True
