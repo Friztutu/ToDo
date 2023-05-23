@@ -45,7 +45,7 @@
                         <small><b>Осталось: {% if task.is_die %} Просрочено {% elif task.is_done %} Выполнено {% else %} {{ task.get_now|timesince:task.deadline  }} {% endif %}</b></small>
                     </div>
                     <p class="mb-1">{{ task.description|truncatewords:20|linebreaks }}</p>
-                    <small><b>Дедлайн: {{ task.deadline|naturaltime }}</b></small>
+                    <small><b>Дедлайн: {{ task.deadline }}</b></small>
                 </a>
             {% endfor %}
         </div>
