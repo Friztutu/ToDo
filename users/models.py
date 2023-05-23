@@ -3,4 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
-    pass
+    image = models.ImageField(upload_to='user_img', null=True, blank=True)
+    done_tasks_count = models.PositiveSmallIntegerField(default=0)
+    die_tasks_count = models.PositiveSmallIntegerField(default=0)

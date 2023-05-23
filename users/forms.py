@@ -54,7 +54,8 @@ class ProfileForm(UserChangeForm):
     username = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'AlexErof'})
     )
+    image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control', 'id': 'formFile'}))
 
     class Meta:
         model = CustomUser
-        fields = ('first_name', 'last_name', 'email', 'username')
+        fields = ('image', 'first_name', 'last_name', 'email', 'username')
