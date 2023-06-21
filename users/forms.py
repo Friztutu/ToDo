@@ -42,3 +42,22 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
+
+
+class ProfileForm(UserChangeForm):
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'})
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Фамилия'})
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Почта'})
+    )
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Логин'})
+    )
+
+    class Meta:
+        model = CustomUser
+        fields = ('first_name', 'last_name', 'email', 'username')

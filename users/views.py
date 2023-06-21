@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView, CreateView
 from users.models import CustomUser
-from users.forms import UserLoginForm, RegistrationForm
+from users.forms import UserLoginForm, RegistrationForm, ProfileForm
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -20,13 +20,17 @@ class UserLoginView(LoginView):
         return reverse('users:profile', args=(self.request.user.id,))
 
 
-class ProfileView(TemplateView):
+class ProfileView(UpdateView):
     template_name = 'users/profile.html'
     model = CustomUser
+    form_class = ProfileForm
 
     def get(self, request, *args, **kwargs):
         self.kwargs['pk'] = request.user.id
         return super().get(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('users:profile', args=(self.request.user.id,))
 
 
 class RegistrationView(CreateView):
