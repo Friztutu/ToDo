@@ -39,7 +39,7 @@
                                 Профиль
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'users:profile' %}">Личный кабинет</a></li>
+                                <li><a class="dropdown-item" href="{% url 'users:profile' user.id %}">Личный кабинет</a></li>
                                 <li><a class="dropdown-item" href="#">Статистика</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Выйти</a></li>
